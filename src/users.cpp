@@ -432,6 +432,12 @@ bool LocalUser::HasPermission(const std::string &command)
 
 bool User::HasPrivPermission(const std::string &privstr, bool noisy)
 {
+	if (!IS_OPER(this)) 
+	{
+		if (noisy)
+			this->WriteServ("NOTICE %s :You are not an oper", this->nick.c_str());
+		return false;
+	}
 	return true;
 }
 
